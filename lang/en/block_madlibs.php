@@ -25,4 +25,7 @@
 $string['pluginname'] = 'Mad Libs';
 $string['madlibs'] = 'Mad Libs';
 $string['madlibs:addinstance'] = 'Add a new Mad Libs block';
-$string['madlibs:myaddinstance'] = 'Add a new Mad Libs block to the My Moodle page';
+$string['madlibs:myaddinstance'] = 'Add a new Mad Libs block to Dashboard';
+
+$string['addstory'] = 'Add a new story';
+$string['addword'] = 'Add a new word';

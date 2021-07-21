@@ -34,13 +34,29 @@ class block_madlibs extends block_base {
 
     public function get_content() {
         if ($this->content !== null) {
-          return $this->content;
+            return $this->content;
         }
 
-        $this->content         =  new stdClass();
+        $this->content         = new stdClass();
         $this->content->text   = 'The content of our Mad Libs block!';
-        //$this->content->footer = 'Footer here...';
+        //$this->content->text   = new block_madlibs\story::generate_story();
+
+        $this->content->footer = '';
+        if (has_capability('block/madlibs:addstory', $this->context)) {
+            $this->content->footer .= html_writer::link(new moodle_url('/block/madlibs/edit.php', ['action' => 'addsentence']),
+                get_string('addstory', 'block_madlibs')) . '<br/>';
+        }
+        if (has_capability('block/madlibs:addword', $this->context)) {
+            $this->content->footer .= html_writer::link(new moodle_url('/block/madlibs/edit.php', ['action' => 'addword']),
+                get_string('addword', 'block_madlibs'));
+        }
 
         return $this->content;
+    }
+
+    function applicable_formats() {
+        return array(
+            'my' => true
+        );
     }
 }
