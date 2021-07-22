@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="blocks/madlibs/db" VERSION="20210721" COMMENT="XMLDB file for Moodle blocks/madlibs"
+<XMLDB PATH="blocks/madlibs/db" VERSION="20210722" COMMENT="XMLDB file for Moodle blocks/madlibs"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="block_madlibs_stories" COMMENT="Stories for Mad Libs block.">
+    <TABLE NAME="block_madlibs_categories" COMMENT="Categories for words for Mad Libs block.">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="story" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="block_madlibs_sentences" COMMENT="Sentences for Mad Libs block.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="sentence" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
@@ -19,12 +28,13 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="word" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="partofspeech" TYPE="int" LENGTH="1" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="categoryid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="categoryid" TYPE="foreign" FIELDS="categoryid" REFTABLE="block_madlibs_category" REFFIELDS="id"/>
       </KEYS>
     </TABLE>
   </TABLES>

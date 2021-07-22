@@ -25,7 +25,12 @@
 $string['pluginname'] = 'Mad Libs';
 $string['madlibs'] = 'Mad Libs';
 $string['madlibs:addinstance'] = 'Add a new Mad Libs block';
+$string['madlibs:addsentences'] = 'Add sentences';
+$string['madlibs:addwords'] = 'Add words';
 $string['madlibs:myaddinstance'] = 'Add a new Mad Libs block to Dashboard';
 
-$string['addstory'] = 'Add a new story';
+$string['addsentence'] = 'Add a new sentence';
 $string['addword'] = 'Add a new word';
+$string['category'] = 'Category';
+$string['sentence'] = 'Sentence';
+$string['word'] = 'Word';

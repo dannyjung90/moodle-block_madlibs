@@ -22,10 +22,7 @@
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define('NOUN',      '0');
-define('VERB',      '1');
-define('ADJECTIVE', '2');
-define('ADVERB',    '3');
+defined('MOODLE_INTERNAL') || die();
 
 class block_madlibs extends block_base {
     public function init() {
@@ -37,17 +34,17 @@ class block_madlibs extends block_base {
             return $this->content;
         }
 
-        $this->content         = new stdClass();
-        $this->content->text   = 'The content of our Mad Libs block!';
-        //$this->content->text   = new block_madlibs\story::generate_story();
+        $this->content = new stdClass();
+        $this->content->text = 'The content of our Mad Libs block!';
+        //$this->content->text   = block_madlibs\story::generate();
 
         $this->content->footer = '';
-        if (has_capability('block/madlibs:addstory', $this->context)) {
-            $this->content->footer .= html_writer::link(new moodle_url('/block/madlibs/edit.php', ['action' => 'addsentence']),
-                get_string('addstory', 'block_madlibs')) . '<br/>';
+        if (has_capability('block/madlibs:addsentences', $this->context)) {
+            $this->content->footer .= html_writer::link(new moodle_url('/blocks/madlibs/edit.php', ['action' => 'addsentence']),
+                get_string('addsentence', 'block_madlibs')) . '<br/>';
         }
-        if (has_capability('block/madlibs:addword', $this->context)) {
-            $this->content->footer .= html_writer::link(new moodle_url('/block/madlibs/edit.php', ['action' => 'addword']),
+        if (has_capability('block/madlibs:addwords', $this->context)) {
+            $this->content->footer .= html_writer::link(new moodle_url('/blocks/madlibs/edit.php', ['action' => 'addword']),
                 get_string('addword', 'block_madlibs'));
         }
 

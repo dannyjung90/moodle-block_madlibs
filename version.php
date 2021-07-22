@@ -15,13 +15,15 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Version detailds for Mad Libs block.
+ * Version details for Mad Libs block.
  *
  * @package    block_madlibs
  * @copyright  2021 Danny Jung
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $plugin->component = 'block_madlibs';
-$plugin->version = 2021071900;
+$plugin->version = 2021072200;
 $plugin->requires = 2021051701;

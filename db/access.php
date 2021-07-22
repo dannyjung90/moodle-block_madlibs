@@ -15,12 +15,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Mad Libs block capabilities.
+ * Capabilities for Mad Libs block.
  *
  * @package    block_madlibs
  * @copyright  2021 Danny Jung
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
 
 $capabilities = array(
     'block/madlibs:myaddinstance' => array(
@@ -46,7 +48,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 
-    'block/madlibs:addstory' => array(
+    'block/madlibs:addsentences' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',
@@ -57,7 +59,7 @@ $capabilities = array(
         )
     ),
 
-    'block/madlibs:addword' => array(
+    'block/madlibs:addwords' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
 
         'captype' => 'write',
