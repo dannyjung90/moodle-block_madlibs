@@ -29,6 +29,8 @@ $action = required_param('action', PARAM_ALPHA);
 
 $PAGE->set_url('/blocks/madlibs/edit.php', array('action' => $action));
 
+require_login();
+
 $context = context_system::instance();
 $PAGE->set_context($context);
 
@@ -57,22 +59,13 @@ if ($mform->is_cancelled()) {
 } else if ($formdata = $mform->get_data()) {
     switch ($action) {
         case 'addsentence':
-            $data = new stdClass();
-            $data->sentence = $formdata->sentence;
-            $data->timecreated = $data->timemodified = time();
-            $DB->insert_record('block_madlibs_sentences', $data, false);
-            // $sentence = new sentence($formdata);
-            // $sentence->add();
+            $sentence = new block_madlibs\sentence($formdata->sentence);
+            $sentence->add();
         break;
 
         case 'addword':
-            $data = new stdClass();
-            $data->word = $formdata->word;
-            $data->categoryid = $formdata->category;
-            $data->timecreated = $data->timemodified = time();
-            $DB->insert_record('block_madlibs_words', $data, false);
-            // $word = new word($formdata);
-            // $word->add();
+            $word = new block_madlibs\word($formdata->word, $formdata->category);
+            $word->add();
         break;
 
         default :

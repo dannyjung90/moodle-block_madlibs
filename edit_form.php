@@ -28,7 +28,9 @@ require_once($CFG->libdir . '/formslib.php');
 
 class block_madlibs_edit_form extends moodleform {
     public function definition() {
-        $mform =& $this->_form;
+        global $DB;
+
+        $mform = $this->_form;
 
         $action = $this->_customdata['action'];
 
@@ -44,12 +46,9 @@ class block_madlibs_edit_form extends moodleform {
             $mform->addRule('word', null, 'required', null, 'client');
             $mform->addRule('word', null, 'maxlength', 255, 'client');
 
-            $options = array(
-                null, "NOUN", "VERB", "ADJECTIVE", "ADVERB"
-            );
-            $mform->addElement('select', 'category', get_string('category', 'block_madlibs'), $options);
+            $categories = $DB->get_records_menu('block_madlibs_categories');
+            $mform->addElement('select', 'category', get_string('category', 'block_madlibs'), $categories);
             $mform->addRule('category', null, 'required', null, 'client');
-            $mform->setDefault('category', null);
         }
 
         $this->add_action_buttons(true, get_string('add'));
@@ -59,7 +58,13 @@ class block_madlibs_edit_form extends moodleform {
         $mform->setDefault('action', $action);
     }
 
-    function validation($data, $files) {
-        return array();
+    public function validation($data, $files) {
+        $errors = parent::validation($data, $files);
+
+        if ($errors) {
+            return $errors;
+        }
+
+        return true;
     }
 }

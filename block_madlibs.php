@@ -35,8 +35,11 @@ class block_madlibs extends block_base {
         }
 
         $this->content = new stdClass();
-        $this->content->text = 'The content of our Mad Libs block!';
-        //$this->content->text   = block_madlibs\story::generate();
+
+        $madlib = new block_madlibs\sentence();
+        $madlib->random();
+        $madlib->fill_placeholders();
+        $this->content->text = $madlib->sentence;
 
         $this->content->footer = '';
         if (has_capability('block/madlibs:addsentences', $this->context)) {
@@ -51,7 +54,7 @@ class block_madlibs extends block_base {
         return $this->content;
     }
 
-    function applicable_formats() {
+    public function applicable_formats() {
         return array(
             'my' => true
         );
