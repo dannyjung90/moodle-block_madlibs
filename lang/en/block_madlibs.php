@@ -15,22 +15,35 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Strings for Mad Libs block.
+ * Language strings for Mad Libs block.
  *
  * @package    block_madlibs
+ * @category   string
  * @copyright  2021 Danny Jung
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
+// Plugin strings.
 $string['pluginname'] = 'Mad Libs';
 $string['madlibs'] = 'Mad Libs';
+
+// Capability strings.
 $string['madlibs:addinstance'] = 'Add a new Mad Libs block';
 $string['madlibs:addsentences'] = 'Add sentences';
 $string['madlibs:addwords'] = 'Add words';
 $string['madlibs:myaddinstance'] = 'Add a new Mad Libs block to Dashboard';
 
+// Form strings.
 $string['addsentence'] = 'Add a new sentence';
 $string['addword'] = 'Add a new word';
 $string['category'] = 'Category';
+$string['category_help'] = 'Category of word for placeholder replacement in sentences.';
+$string['nosentences'] = 'No sentences have been added.';
 $string['sentence'] = 'Sentence';
+$string['sentence_help'] = 'Sentence should include categorized placeholders for words. Add placeholders by wrapping categories in a single set of square brackets.
+
+Available categories for placeholders:<br/>
+noun, verb, adjective, adverb';
 $string['word'] = 'Word';

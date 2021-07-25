@@ -26,18 +26,42 @@ namespace block_madlibs;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Word class.
+ *
+ * @package    block_madlibs
+ * @copyright  2021 Danny Jung
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class word {
+    /** @var string Word text */
     public $word;
+
+    /** @var int Category ID */
     public $categoryid;
 
+    /** @var int Timestamp for when this entry was created */
     public $timecreated;
+
+    /** @var int Timestamp for when this entry was last modified */
     public $timemodified;
 
+    /**
+     * Constructor.
+     *
+     * @param string $word Word text
+     * @param int $categoryid Category ID
+     */
     public function __construct($word, $categoryid) {
         $this->word = $word;
         $this->categoryid = $categoryid;
     }
 
+    /**
+     * Inserts this entry into the database.
+     *
+     * @return void
+     */
     public function add() {
         global $DB;
 
@@ -47,6 +71,12 @@ class word {
         $DB->insert_record('block_madlibs_words', $this, false);
     }
 
+    /**
+     * Fetches a random word of category from the database.
+     *
+     * @param string $category Category name (optional)
+     * @return string|null
+     */
     public static function random($category = null) {
         global $DB;
 

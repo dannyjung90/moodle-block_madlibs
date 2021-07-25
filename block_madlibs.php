@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Mad Libs block.
+ * Block definition for Mad Libs block.
  *
  * @package    block_madlibs
  * @copyright  2021 Danny Jung
@@ -24,6 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Block definition.
+ *
+ * @package    block_madlibs
+ * @copyright  2021 Danny Jung
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_madlibs extends block_base {
     public function init() {
         $this->title = get_string('madlibs', 'block_madlibs');
@@ -36,12 +43,15 @@ class block_madlibs extends block_base {
 
         $this->content = new stdClass();
 
+        // Generate random Mad Lib.
         $madlib = new block_madlibs\sentence();
-        $madlib->random();
-        $madlib->fill_placeholders();
+        if ($madlib->random()) {
+            $madlib->fill_placeholders();
+        }
         $this->content->text = $madlib->sentence;
 
         $this->content->footer = '';
+        // Add links for adding sentences and words if user has associated capabilties.
         if (has_capability('block/madlibs:addsentences', $this->context)) {
             $this->content->footer .= html_writer::link(new moodle_url('/blocks/madlibs/edit.php', ['action' => 'addsentence']),
                 get_string('addsentence', 'block_madlibs')) . '<br/>';

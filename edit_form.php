@@ -18,6 +18,7 @@
  * Edit form for Mad Libs block.
  *
  * @package    block_madlibs
+ * @category   form
  * @copyright  2021 Danny Jung
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -26,6 +27,14 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/formslib.php');
 
+/**
+ * Edit form.
+ *
+ * @package    block_madlibs
+ * @category   form
+ * @copyright  2021 Danny Jung
+ * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_madlibs_edit_form extends moodleform {
     public function definition() {
         global $DB;
@@ -37,10 +46,13 @@ class block_madlibs_edit_form extends moodleform {
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
         if ($action == 'addsentence') {
+            // Form elements for adding a new sentence.
             $mform->addElement('textarea', 'sentence', get_string('sentence', 'block_madlibs'));
             $mform->setType('sentence', PARAM_TEXT);
             $mform->addRule('sentence', null, 'required', null, 'client');
+            $mform->addHelpButton('sentence', 'sentence', 'block_madlibs');
         } else if ($action == 'addword') {
+            // Form elements for adding a new word.
             $mform->addElement('text', 'word', get_string('word', 'block_madlibs'));
             $mform->setType('word', PARAM_TEXT);
             $mform->addRule('word', null, 'required', null, 'client');
@@ -49,6 +61,7 @@ class block_madlibs_edit_form extends moodleform {
             $categories = $DB->get_records_menu('block_madlibs_categories');
             $mform->addElement('select', 'category', get_string('category', 'block_madlibs'), $categories);
             $mform->addRule('category', null, 'required', null, 'client');
+            $mform->addHelpButton('category', 'category', 'block_madlibs');
         }
 
         $this->add_action_buttons(true, get_string('add'));
@@ -56,15 +69,5 @@ class block_madlibs_edit_form extends moodleform {
         $mform->addElement('hidden', 'action');
         $mform->setType('action', PARAM_ALPHA);
         $mform->setDefault('action', $action);
-    }
-
-    public function validation($data, $files) {
-        $errors = parent::validation($data, $files);
-
-        if ($errors) {
-            return $errors;
-        }
-
-        return true;
     }
 }

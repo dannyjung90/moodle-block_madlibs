@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Mad Libs block.
+ * Installation script for Mad Libs block.
  *
  * @package    block_madlibs
  * @copyright  2021 Danny Jung
@@ -27,10 +27,11 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_block_madlibs_install() {
     global $DB;
 
+    // Insert initial categories into database.
     $data = array();
     $categories = array('noun', 'verb', 'adjective', 'adverb');
     foreach ($categories as $category) {
-        $data[] = ['category' => $category];
+        $data[] = array('category' => $category);
     }
 
     $DB->insert_records('block_madlibs_categories', $data);

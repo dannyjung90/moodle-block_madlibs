@@ -18,6 +18,7 @@
  * Capabilities for Mad Libs block.
  *
  * @package    block_madlibs
+ * @category   access
  * @copyright  2021 Danny Jung
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

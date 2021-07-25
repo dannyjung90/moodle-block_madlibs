@@ -27,6 +27,7 @@ require_once($CFG->dirroot . '/blocks/madlibs/edit_form.php');
 
 $action = required_param('action', PARAM_ALPHA);
 
+// Page setup.
 $PAGE->set_url('/blocks/madlibs/edit.php', array('action' => $action));
 
 require_login();
@@ -52,6 +53,7 @@ if ($action == 'addsentence') {
 $PAGE->set_title("$SITE->shortname: " . $pagetitle);
 $PAGE->set_heading($SITE->fullname);
 
+// Form setup.
 $mform = new block_madlibs_edit_form(null, array('action' => $action));
 
 if ($mform->is_cancelled()) {
@@ -69,16 +71,17 @@ if ($mform->is_cancelled()) {
         break;
 
         default :
-            print_error('invalidaction');
+            throw new moodle_exception('invalidaction');
     }
 
     redirect(new moodle_url('/my/'));
 }
 
 if ($action != 'addsentence' && $action != 'addword') {
-    print_error('unknowaction');
+    throw new moodle_exception('unknowaction');
 }
 
+// Output.
 echo $OUTPUT->header();
 echo $OUTPUT->heading($pagetitle);
 
